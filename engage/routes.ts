@@ -2,7 +2,8 @@ import { Router } from "express";
 import { controller } from "./controller";
 
 
-export const userRoutes=Router();
+export const engageRoutes=Router();
 
-userRoutes.post('/addGroup',controller.addGroup)
+engageRoutes.post('/addGroup',controller.addGroup)
+engageRoutes.post('/getGroups',controller.getGroups)
 // userRoutes.post('/login',controller.login)

@@ -80,6 +80,16 @@ const register = async (req: any, res: any) => {
     }   
 };
 
+const getUsers = async (req: any, res: any) => {
+    const userRepo = AppDataSource.getRepository(User)
+
+    const users = await userRepo.find();
+    res.status(200).json({
+        status: "200",
+        data: users
+    })
+}
+
 export const controller = {
     login,
     register,

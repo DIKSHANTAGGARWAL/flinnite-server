@@ -44,6 +44,20 @@ const addGroup = async (req: any, res: any) => {
     }
 };
 
+const getGroups = async (req: any, res: any) => {
+    const userRepo = AppDataSource.getRepository(User)
+
+    const user = await userRepo.findOne({
+        where: { email: req.body.email }
+    });
+
+    res.status(200).json({
+        status: "200",
+        data: user?.groups
+    })
+}
+
 export const controller = {
-    addGroup
+    addGroup,
+    getGroups
 }

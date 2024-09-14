@@ -4,17 +4,12 @@ import cors from 'cors';
 import dotenv from "dotenv";
 
 
-// require('./db/config')
 import AppDataSource from "./config";
-
-// import { productRoutes } from './products/routes';
-// import { paymentRoutes } from './payment/routes';
 import { userRoutes } from './auth/routes';
+import { engageRoutes } from "./engage/routes";
 
 const app = express()
 app.use(express.json());
-// app.use(cors())
-// app.use(express.urlencoded({ extended: false }));
 
 
 app.use(
@@ -26,7 +21,8 @@ app.use(
 dotenv.config();
 
 
-app.use("/", userRoutes)
+app.use("/auth", userRoutes)
+app.use("/engage", engageRoutes)
 
 
 const port = 5000;
