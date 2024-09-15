@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-    "scripts": {
+  "scripts": {
     "start": "nodemon app.ts",
     "start:dev": "nodemon --exec ts-node app.ts"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -32,6 +31,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^22.5.5",
     "@types/nodemailer": "^6.4.15",
-    "@types/uniqid": "^5.3.4"
+    "@types/uniqid": "^5.3.4",
+    "ts-node": "^10.9.2"
   }
 }
