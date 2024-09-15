@@ -1,5 +1,5 @@
 import AppDataSource from "../config";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 import User from "../entities/user";
 
