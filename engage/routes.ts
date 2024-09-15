@@ -6,4 +6,6 @@ export const engageRoutes=Router();
 
 engageRoutes.post('/addGroup',controller.addGroup)
 engageRoutes.post('/getGroups',controller.getGroups)
-// userRoutes.post('/login',controller.login)
+engageRoutes.post('/getTasks',controller.getTasks)
+engageRoutes.post('/createTasks',controller.createTask)
+engageRoutes.post('/markComplete',controller.markComplete)

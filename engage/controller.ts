@@ -1,8 +1,9 @@
 import AppDataSource from "../config";
-import bcrypt from "bcrypt";
-import * as jwt from "jsonwebtoken";
+// import bcrypt from "bcryptjs";
+// import * as jwt from "jsonwebtoken";
 import User from "../entities/user";
 import Group from "../entities/group";
+import Task from "../entities/task";
 
 const addGroup = async (req: any, res: any) => {
     console.log(req.body)
@@ -75,7 +76,62 @@ const getGroups = async (req: any, res: any) => {
     })
 }
 
+const getTasks = async (req: any, res: any) => {
+    const taskRepo = AppDataSource.getRepository(Task)
+
+    const tasks = await taskRepo.find({
+        where: {
+          group: {
+            group_id: req.body.groupId,
+          },
+        },
+        relations: ['group'],
+      });
+
+    res.status(200).json({
+        status: "200",
+        tasks: tasks
+    })
+}
+
+const createTask = async (req: any, res: any) => {
+    try {
+        const taskRepo = AppDataSource.getRepository(Task);
+      // Add the task
+        const newTask = new Task();
+        newTask.title = req.body.title;
+        newTask.taskDetails = req.body.taskDetails;
+        newTask.group = req.body.group;
+        taskRepo.save(newTask);
+      // Send success response
+      res.status(201).json(newTask);
+    } catch (error:any) {
+      // Send error response
+      res.status(500).json({ error: error.message });
+    }
+};
+
+const markComplete = async(req:any,res:any)=>{
+    const taskRepo = AppDataSource.getRepository(Task);
+    const task = await taskRepo.findOneBy({ task_id: req.body.taskId });
+
+    if (!task) {
+        throw new Error(`Task with ID ${req.body.taskId} not found.`);
+    }
+
+    // Set isComplete to true
+    task.isComplete = true;
+
+    // Save the updated task
+    const updatedTask = await taskRepo.save(task);
+    res.status(200).json({
+        message:"Updated"
+    })
+}
 export const controller = {
     addGroup,
-    getGroups
+    getGroups,
+    getTasks,
+    createTask,
+    markComplete
 }
