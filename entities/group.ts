@@ -15,10 +15,10 @@ export class Group {
   admin!: string
 
   @OneToMany(() => Message, (message) => message.group)
-    message!: Message[]
+  message!: Message[]
 
-    @ManyToMany(() => User, user => user.groups)
-    users!: User[];
+  @ManyToMany(() => User, user => user.groups)
+  users!: User[];
 
 }
 export default Group;

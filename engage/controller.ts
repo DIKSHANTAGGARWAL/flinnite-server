@@ -43,10 +43,6 @@ const addGroup = async (req: any, res: any) => {
                     relations: ['groups'] 
                 })
                 if (member) {
-                    // let OldGroupsM = member?.groups
-                    // OldGroupsM?.push(newGroup)
-                    // member.groups = OldGroupsM
-                    // await userRepo.save(member)
                     member.groups.push(newGroup);  // Add the group to this member's list of groups
                     await userRepo.save(member);  
                 }
