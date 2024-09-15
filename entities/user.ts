@@ -15,7 +15,7 @@ export class User {
     @Column()
     password!: string
 
-    @ManyToMany(() => Group)
+    @ManyToMany(() => Group,group=>group.users)
     @JoinTable()
     groups!: Group[]
 

@@ -35,12 +35,12 @@ const login = async (req: any, res: any) => {
                 status: "404"
             });
         } else {
-            const accessToken = generateAccessToken(user.email);
+            // const accessToken = generateAccessToken(user.email);
             res.status(200).json({
                 status: "200",
                 message: "User Logged In",
                 userName: user.name,
-                accessToken: accessToken,
+                // accessToken: accessToken,
                 email: user.email,
             });
         }
@@ -93,4 +93,5 @@ const getUsers = async (req: any, res: any) => {
 export const controller = {
     login,
     register,
+    getUsers
 }

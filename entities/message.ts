@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany,ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany,ManyToOne, CreateDateColumn } from "typeorm";
 import Group from "./group";
 
 
@@ -10,8 +10,15 @@ export class Message {
   @Column()
   sender!: string
 
+  // @ManyToOne(() => User, user => user.messages)
+  //   sender: User;
+
+
   @Column()
-  time!: string 
+  content!: string
+
+  @CreateDateColumn()
+    timestamp!: Date;
 
   @ManyToOne(() => Group, (group) => group.message)
     group!:Group
