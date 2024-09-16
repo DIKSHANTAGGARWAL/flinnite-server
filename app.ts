@@ -113,43 +113,43 @@
 
         });
 
-        // interface GroupMembers {
-        //     [groupId: string]: string[];
-        // }
+        interface GroupMembers {
+            [groupId: string]: string[];
+        }
         
-        // let groupMembers: GroupMembers = {};
-        // socket.on('joinGroupCall', ({ groupId }: { groupId: string }) => {
-        //     if (!groupMembers[groupId]) {
-        //     groupMembers[groupId] = [];
-        //     }
-        //     // console.log("object")
+        let groupMembers: GroupMembers = {};
+        socket.on('joinGroupCall', ({ groupId }: { groupId: string }) => {
+            if (!groupMembers[groupId]) {
+            groupMembers[groupId] = [];
+            }
+            // console.log("object")
         
-        //     groupMembers[groupId].push(socket.id);
-        //     const members = groupMembers[groupId].filter(
-        //     (member) => member !== socket.id
-        //     );
+            groupMembers[groupId].push(socket.id);
+            const members = groupMembers[groupId].filter(
+            (member) => member !== socket.id
+            );
         
-        //     // Send existing group members to the newly joined user
-        //     socket.emit('groupMembers', members);
+            // Send existing group members to the newly joined user
+            socket.emit('groupMembers', members);
         
-        //     // Inform existing group members about the new peer
-        //     members.forEach((memberId) => {
-        //     io.to(memberId).emit('newPeer', socket.id);
-        //     });
-        // });
+            // Inform existing group members about the new peer
+            members.forEach((memberId) => {
+            io.to(memberId).emit('newPeer', socket.id);
+            });
+        });
         
-        // // Handle sending WebRTC signal to another peer
-        // socket.on(
-        //     'sendSignal',
-        //     ({ userToSignal, callerID, signal }: { userToSignal: string; callerID: string; signal: any }) => {
-        //     io.to(userToSignal).emit('receiveSignal', { signal, callerID });
-        //     }
-        // );
+        // Handle sending WebRTC signal to another peer
+        socket.on(
+            'sendSignal',
+            ({ userToSignal, callerID, signal }: { userToSignal: string; callerID: string; signal: any }) => {
+            io.to(userToSignal).emit('receiveSignal', { signal, callerID });
+            }
+        );
         
-        // // Handle returning WebRTC signal
-        // socket.on('returnSignal', ({ signal, callerID }: { signal: any; callerID: string }) => {
-        //     io.to(callerID).emit('receiveSignal', { signal, id: socket.id });
-        // });
+        // Handle returning WebRTC signal
+        socket.on('returnSignal', ({ signal, callerID }: { signal: any; callerID: string }) => {
+            io.to(callerID).emit('receiveSignal', { signal, id: socket.id });
+        });
 
         
 
@@ -157,6 +157,8 @@
             console.log('User disconnected');
         });
     });
+
+
 
     const PORT = process.env.PORT || 5000;
 
