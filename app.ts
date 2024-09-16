@@ -153,12 +153,12 @@
         });
     });
 
-    const port = 5000;
+    const PORT = process.env.PORT || 5000;
 
     AppDataSource.initialize()
         .then(() => {
-            server.listen(port, () => {
-                console.log(`Server is running on port ${port}`);
+            server.listen(PORT, () => {
+                console.log(`Server is running on port ${PORT}`);
             });
         })
         .catch((err: any) => console.log("error", err));
