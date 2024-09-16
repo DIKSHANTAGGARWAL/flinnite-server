@@ -20,7 +20,13 @@
 
     dotenv.config();
 
-
+    app.get("/",(req,res)=>{
+        console.log("object")
+        res.status(200).json({
+            status: "200",
+            message:"working"
+        })
+    })
     app.use("/auth", userRoutes)
     app.use("/engage", engageRoutes)
 

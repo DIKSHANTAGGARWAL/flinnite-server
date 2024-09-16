@@ -8,9 +8,9 @@ const AppDataSource = new DataSource({
     url: process.env.DATABASE_URL,
     entities: Tables,
     synchronize: true,
-    ssl: {
-        rejectUnauthorized: false // Set to true if you have a valid SSL certificate
-    },
+    // ssl: {
+    //     rejectUnauthorized: false // Set to true if you have a valid SSL certificate
+    // },
     // logging: true
 });
 
