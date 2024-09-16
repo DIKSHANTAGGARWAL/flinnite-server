@@ -46,7 +46,7 @@ const addGroup = async (req: any, res: any) => {
                 })
                 console.log(member)
                 if (member) {
-                    member.groups.push(newGroup);  // Add the group to this member's list of groups
+                    member.groups.push(newGroup);  
                     await userRepo.save(member);  
                 }
             }
@@ -99,16 +99,16 @@ const getTasks = async (req: any, res: any) => {
 const createTask = async (req: any, res: any) => {
     try {
         const taskRepo = AppDataSource.getRepository(Task);
-      // Add the task
+      
         const newTask = new Task();
         newTask.title = req.body.title;
         newTask.taskDetails = req.body.taskDetails;
         newTask.group = req.body.group;
         taskRepo.save(newTask);
-      // Send success response
+      
       res.status(201).json(newTask);
     } catch (error:any) {
-      // Send error response
+      
       res.status(500).json({ error: error.message });
     }
 };
@@ -121,10 +121,7 @@ const markComplete = async(req:any,res:any)=>{
         throw new Error(`Task with ID ${req.body.taskId} not found.`);
     }
 
-    // Set isComplete to true
     task.isComplete = true;
-
-    // Save the updated task
     const updatedTask = await taskRepo.save(task);
     res.status(200).json({
         message:"Updated"

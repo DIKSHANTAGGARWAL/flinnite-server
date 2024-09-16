@@ -20,7 +20,6 @@ export class Group {
   @ManyToMany(() => User, user => user.groups)
   users!: User[];
 
-  // one to mant task
   @OneToMany(() => Task, (task) => task.group)
   tasks!: Task[];
 

@@ -40,7 +40,7 @@
     const server = http.createServer(app);
     const io = new Server(server, {
         cors: {
-            origin: "*",  // Allow all origins (replace with specific domain in production)
+            origin: "*",  
             methods: ["GET", "POST"]
         }
     });
@@ -67,7 +67,7 @@
                     });
                     // console.log(messages)
                     // console.log("messages56 ")
-                    socket.emit('chatHistory', messages); // Send chat history to user
+                    socket.emit('chatHistory', messages); 
                 }
             } catch (error) {
                 console.error("Error fetching messages:", error);
@@ -82,7 +82,7 @@
             }
         });
 
-        // Handle new message
+   
         socket.on('sendMessage', async ({ groupId, userEmail, content }) => {
             try {
 
@@ -98,9 +98,9 @@
                     newMessage.timestamp = new Date();
                     console.log(newMessage)
 
-                    await messageRepo.save(newMessage);  // Store in DB
+                    await messageRepo.save(newMessage); 
 
-                    // Broadcast to group
+                  
                     io.to(groupId).emit('newMessage', {
                         content,
                         sender: user.email,
@@ -153,7 +153,6 @@
 
         
 
-        // Disconnect user
         socket.on('disconnect', () => {
             console.log('User disconnected');
         });
