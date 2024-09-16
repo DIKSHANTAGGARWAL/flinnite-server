@@ -34,15 +34,17 @@ const addGroup = async (req: any, res: any) => {
             console.log(newGroup);
             user.groups.push(newGroup);
             await userRepo.save(user);
-            // console.log("2")
+            console.log("2")
+            console.log(user)
             let members = req.body.members
             for (let i = 0; i < members.length; i++) {
-                // console.log(i+3)
-                let memberId = members[i].userId
+                console.log(i+3)
+                let memberId = members[i]
                 let member = await userRepo.findOne({
                     where: { user_id: memberId },
                     relations: ['groups'] 
                 })
+                console.log(member)
                 if (member) {
                     member.groups.push(newGroup);  // Add the group to this member's list of groups
                     await userRepo.save(member);  
